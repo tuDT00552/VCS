@@ -1,4 +1,4 @@
-# Import file DB vào Mysql tại đường dẫn ( VCS/BE/src/main/java/com/itsol/bank/resource/Dump20201216.sql ).
+# Dump file DB vào Mysql tại đường dẫn ( VCS/BE/src/main/java/com/itsol/bank/resource/Dump20201216.sql ).
 
 # Chỉnh cấu hình Mysql tại đường dẫn ( VCS/BE/src/main/resources/application.properties ).
 
