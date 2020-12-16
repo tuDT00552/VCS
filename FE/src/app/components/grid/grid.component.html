@@ -1,0 +1,44 @@
+<div class="grid__body" #gridBodyRef>
+    <div class="grid__no-items" *ngIf="!isLoading && (!rows || !rows.length); else hasItems">
+        <span>no items</span>
+    </div>
+    <ng-template #hasItems>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="idField">STT</th>
+                    <th scope="col" *ngFor="let cell of cells;" [ngClass]="{
+                            'grid__block--left': cell.align === 'left',
+                            'grid__block--center': cell.align === 'center',
+                            'grid__block--right': cell.align === 'right'
+                        }" [style.width.px]="cell.width">
+                        {{cell.label}}
+                    </th>
+                    <th class="idField">Action</th>
+                </tr>
+            </thead>
+            <tbody class="tbody-custom">
+                <tr class="grid__item" *ngFor="let item of rows; let i = index">
+                    <td class="idField">{{(pageNumber * 25) + 1 + i}}</td>
+                    <td class="grid__block" *ngFor="let cell of cells;" [ngClass]="{
+                        'grid__block--left': cell.align === 'left',
+                        'grid__block--center': cell.align === 'center',
+                        'grid__block--right': cell.align === 'right'
+                    }" [style.width.px]="cell.width">
+                        {{item[cell.field]}}
+                    </td>
+                    <td class="idField">
+                        <div class="action">
+                            <button *ngIf="token" (click)="editAccount(item)" class="btn btn-secondary">
+                                Edit
+                            </button>
+                            <button *ngIf="token" (click)="delAccount(item)" class="btn btn-secondary">
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-template>
+</div>

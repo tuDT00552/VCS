@@ -1,0 +1,118 @@
+<button *ngIf="token" type="button" (click)="resetForm()" #openModal class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Add Account
+</button><br>
+<button *ngIf="!token" style="float: right;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalz">
+  Login
+</button>
+<button *ngIf="token" style="float: right;" (click)="logout()" class="btn btn-danger">
+  Logout
+</button>
+<label>
+  Keyword: 
+  <input type="text" [formControl]="keyword">
+  <button (click)="submitSearch()" style="margin-left: 10px;" class="btn btn-success">
+    Search
+  </button>
+</label>
+<label>
+<app-grid class="page__grid" [cells]="gridCells" [rows]="listData" [pageNumber]="pageNumber" [totalRows]="totalRows"
+  [isLoading]="isLoading" [token]="token" (delete)="onDelete($event)" (edit)="onEdit($event)">
+</app-grid>
+<mat-paginator [pageSize]="25" [length]="totalElements" (page)="nextPage($event)">
+</mat-paginator>
+<ngx-spinner></ngx-spinner>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Account</h5>
+        <button type="button" #closeAddExpenseModal class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="accountForm">
+          <label>
+            Account Number:<br>
+            <input type="number" formControlName="account_number">
+          </label>
+          <label>
+            First Name:<br>
+            <input type="text" formControlName="firstname">
+          </label>
+          <label>
+            Last Name:<br>
+            <input type="text" formControlName="lastname">
+          </label>
+          <label>
+            Address:<br>
+            <input type="text" formControlName="address">
+          </label>
+          <label>
+            Balance:<br>
+            <input type="number" formControlName="balance">
+          </label>
+          <label>
+            Gender:<br>
+            <input type="text" formControlName="gender">
+          </label>
+          <label>
+            City:<br>
+            <input type="text" formControlName="city">
+          </label>
+          <label>
+            Employeer:<br>
+            <input type="text" formControlName="employer">
+          </label>
+          <label>
+            State:<br>
+            <input type="text" formControlName="state">
+          </label>
+          <label>
+            Age:<br>
+            <input type="number" formControlName="age">
+          </label>
+          <label>
+            Email:<br>
+            <input type="text" formControlName="email">
+          </label>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="save()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div><!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalz" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login Form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="loginForm">
+          <label>
+            Username:<br>
+            <input type="text" formControlName="username">
+          </label>
+          <label>
+            Password:<br>
+            <input type="text" formControlName="password">
+          </label>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button (click)="login()" type="button" class="btn btn-primary">Login</button>
+      </div>
+    </div>
+  </div>
+</div>

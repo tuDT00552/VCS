@@ -1,0 +1,69 @@
+table{
+  width: 100%;
+  th{
+    color: black;
+  }
+  th, td{
+    border-bottom: .5px solid #333;
+    padding: 10px 5px;
+    word-wrap: break-word;
+  }
+}
+.grid__block--left{
+  text-align: left;
+}
+.grid__block--center{
+  text-align: center;
+}
+.grid__block--right{
+  text-align: right;
+}
+tbody {
+  display:block;
+  height: 500px;
+  overflow:auto;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+thead {
+  width: calc( 100% - 1em )
+}
+
+.pagination {
+  margin-top: 30px;
+  display: flex;
+  position: fixed;
+  left: 10px;
+  justify-content: right;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: rgb(0, 140, 255);
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.idField {
+  width: 50px;
+  text-align: center;
+}
+
+.action {
+  display: flex;
+}
+
+.action button{
+ padding: 2px;
+ margin: 1px;
+}
