@@ -66,12 +66,12 @@ export class AppComponent implements OnInit {
 
   login() {
     this.accountService.login(this.loginForm.value).subscribe(data => {
-      
+
     }, error => {
-      if(error.status === 400) {
-        this.toastr.error(error.error,'Error!')
+      if (error.status === 400) {
+        this.toastr.error(error.error, 'Error!')
       } else if (error.status === 201 || error.status === 200) {
-        this.toastr.success('Đăng nhập thành công','Success!')
+        this.toastr.success('Đăng nhập thành công', 'Success!')
         localStorage.setItem('token', error.error.text);
         window.location.reload();
       }
@@ -79,7 +79,7 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    this.toastr.warning('Đăng xuất thành công','Info!')
+    this.toastr.warning('Đăng xuất thành công', 'Info!')
     localStorage.removeItem('token');
     window.location.reload();
   }
@@ -110,10 +110,14 @@ export class AppComponent implements OnInit {
   private getData(page, size) {
     this.spinner.show();
     this.accountService.getAllAccount(page, size).subscribe(data => {
-      this.totalElements = data.totalElements;
-      this.pageNumber = data.pageable.pageNumber;
-      this.listData = data.content;
-      this.setCell(data.content[0]);
+      if (data.content.length > 0) {
+        this.totalElements = data.totalElements;
+        this.pageNumber = data.pageable.pageNumber;
+        this.listData = data.content;
+        this.setCell(data.content[0]);
+      } else {
+        this.spinner.hide();
+      }
     }, error => {
       this.spinner.hide();
       this.toastr.error(error.error.message, 'Error!');
@@ -124,10 +128,14 @@ export class AppComponent implements OnInit {
     this.spinner.show();
     if (keyword) {
       this.accountService.searchAccount(keyword, page, size).subscribe(data => {
-        this.totalElements = data.totalElements;
-        this.pageNumber = data.pageable.pageNumber;
-        this.listData = data.content;
-        this.setCell(data.content[0]);
+        if (data.content.length > 0) {
+          this.totalElements = data.totalElements;
+          this.pageNumber = data.pageable.pageNumber;
+          this.listData = data.content;
+          this.setCell(data.content[0]);
+        } else {
+          this.spinner.hide();
+        }
       }, error => {
         this.spinner.hide();
         this.toastr.error(error.error.message, 'Error!');
